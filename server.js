@@ -59,6 +59,29 @@ app.delete("/api/users/:id", async (req, res, next) => {
   }
 });
 
+app.put("/api/things/:id/inc", async (req, res, next) => {
+  try {
+    const thing = await Thing.update(
+      { count: req.body.count + 1 },
+      { where: { id: req.params.id } }
+    );
+    res.send(await Thing.findByPk(req.params.id));
+  } catch (ex) {
+    next(ex);
+  }
+});
+app.put("/api/things/:id/sub", async (req, res, next) => {
+  try {
+    const thing = await Thing.update(
+      { count: req.body.count - 1 },
+      { where: { id: req.params.id } }
+    );
+    res.send(await Thing.findByPk(req.params.id));
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port}`));

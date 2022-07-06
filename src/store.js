@@ -35,6 +35,19 @@ const store = createStore((state = initialState, action) => {
     return { ...state, things: updatedThings };
   }
 
+  if (action.type === "INC_THING") {
+    const updatedThings = state.things.filter(
+      (_thing) => action.thing.id !== _thing.id
+    );
+    return { ...state, things: [...updatedThings, action.thing] };
+  }
+
+  if (action.type === "SUB_THING") {
+    const updatedThings = state.things.filter(
+      (_thing) => action.thing.id !== _thing.id
+    );
+    return { ...state, things: [...updatedThings, action.thing] };
+  }
   return state;
 });
 
