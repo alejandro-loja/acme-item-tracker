@@ -28,6 +28,12 @@ const store = createStore((state = initialState, action) => {
     );
     return { ...state, users: updatedUsers };
   }
+  if (action.type === "DELETE_THING") {
+    const updatedThings = state.things.filter(
+      (_thing) => action.thing.id !== _thing.id
+    );
+    return { ...state, things: updatedThings };
+  }
 
   return state;
 });
